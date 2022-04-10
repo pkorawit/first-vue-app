@@ -17,6 +17,9 @@
       <div class="menu-item">
        <router-link to="/voting">Voting</router-link> 
       </div>
+       <div class="menu-item">
+       <router-link to="/dashboard">Dashboard</router-link> 
+      </div>
     </v-navigation-drawer>
 
     <v-app-bar app>

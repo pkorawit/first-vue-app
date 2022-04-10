@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card :class="color">
-      <v-card-title primary-title> {{title}} </v-card-title>
+      <v-card-title primary-title> {{title}} - {{id}} </v-card-title>
       <v-card-subtitle> {{desc}} </v-card-subtitle>
       <v-card-text><h2>Count: {{count}}</h2></v-card-text>
       <v-card-actions>
@@ -13,7 +13,11 @@
 
 <script>
 export default {
-    props: ['title', 'desc', 'color'],
+    props: ['id','title', 'desc', 'startCount', 'color'],
+    emits: ['countAdded'],
+    mounted(){
+        this.count = this.startCount
+    },
     data(){
         return {
             count: 0
@@ -22,6 +26,7 @@ export default {
     methods: {
         addVote(){
             this.count++
+            this.$emit('countAdded', this.id, this.count)
         }
     }
 };
