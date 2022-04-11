@@ -1,5 +1,5 @@
 <template>
-  <Bar
+  <Bar v-if="loaded"
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -62,28 +62,30 @@ export default {
       default: () => []
     }
   },
+  mounted(){
+    //Get data from Firestore
+    this.loaded = false
+    const db = this.$firebase.firestore();
+    db.collection("teams")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.chartData.labels.push(doc.data().title)
+          this.chartData.datasets[0].data.push(doc.data().voteCount)
+          this.loaded = true
+        });
+      });
+  },
   data() {
     return {
+      loaded: false,
       chartData: {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December'
-        ],
+        labels: [],
         datasets: [
           {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+            label: 'No of Vote',
+            backgroundColor: 'indigo',
+            data: []
           }
         ]
       },
