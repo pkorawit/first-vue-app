@@ -1,5 +1,10 @@
 <template>
+<<<<<<< HEAD
   <Bar v-if="loaded"
+=======
+  <Bar
+    v-if="loaded"
+>>>>>>> 08d914074a7771616af5646ffc2d2b96cbd9b82b
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -72,9 +77,16 @@ export default {
         querySnapshot.forEach((doc) => {
           this.chartData.labels.push(doc.data().title)
           this.chartData.datasets[0].data.push(doc.data().voteCount)
+<<<<<<< HEAD
           this.loaded = true
         });
       });
+=======
+          this.loaded = true;
+        });        
+      });
+    
+>>>>>>> 08d914074a7771616af5646ffc2d2b96cbd9b82b
   },
   data() {
     return {
@@ -83,7 +95,11 @@ export default {
         labels: [],
         datasets: [
           {
+<<<<<<< HEAD
             label: 'No of Vote',
+=======
+            label: 'Vote Counts',
+>>>>>>> 08d914074a7771616af5646ffc2d2b96cbd9b82b
             backgroundColor: 'indigo',
             data: []
           }
